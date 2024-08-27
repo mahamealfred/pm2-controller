@@ -2,7 +2,7 @@ const express=require("express")
 const cron = require('node-cron');
 const pm2 = require('pm2');
 const app = express();
-const PORT = 2000;
+const PORT = 1400;
 
 //loading middlewares
 app.use(express.json());
