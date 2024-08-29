@@ -7,7 +7,6 @@ const PORT = 1400;
 //loading middlewares
 app.use(express.json());
 
-// Replace 'your-app-name' with the name or ID of the PM2 process you want to stop
 const appName = 'xpay-test-apis';
 
 // Schedule the cron job to run at a specific time
@@ -36,9 +35,9 @@ const appName = 'xpay-test-apis';
 //     timezone: "Africa/Kigali" // Replace with your timezone, e.g., "America/New_York"
 // });
 
-// Schedule a cron job to stop the PM2 process again after 14 days
+
 cron.schedule('14 11 * * *', () => {
-    console.log('Stopping PM2 process after 14 days...');
+    console.log('Starting PM2 process.');
 
     pm2.connect((err) => {
         if (err) {
@@ -47,20 +46,20 @@ cron.schedule('14 11 * * *', () => {
         }
 
         pm2.stop(appName, (err, proc) => {
-            pm2.disconnect(); // Disconnect from PM2
+            pm2.disconnect(); 
 
             if (err) {
-                console.error('Error stopping process:', err);
+                console.error('Error started process:', err);
                 return;
             }
 
-            console.log(`PM2 process ${appName} stopped successfully after 14 days.`);
+            console.log(`PM2 process ${appName} started successfully.`);
         });
     });
 }, {
     timezone: "Africa/Kigali",
     scheduled: true,
-    delay:  24 * 60 * 60 * 1000 // Delay the execution by 7 days (7 * 24 hours)
+    delay: 5 * 24 * 60 * 60 * 1000 
 });
 
 console.log('Cron job scheduled to Controlle PM2 process.');
